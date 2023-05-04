@@ -8,8 +8,8 @@ const Filter = (props) => {
                 <div className={styles["icon-wrapper"]}>
                     <img src="/images/filter-icon.png" alt="" />
                     <p className={styles["filter-text"]}>Filter</p>
-                    <img src="/images/grid-view-icon.png" alt="" />
-                    <img src="/images/list-view-icon.png" alt="" />
+                    <img src="/images/grid-view-icon.png" alt="" onClick={() => props.setGridView(true)}  />
+                    <img src="/images/list-view-icon.png" alt="" onClick={() => props.setGridView(false)} />
                     <p className={styles["amount-text"]}>Showing 1-16 of 32 results</p>
                 </div>
                 <div className={styles.controls}>

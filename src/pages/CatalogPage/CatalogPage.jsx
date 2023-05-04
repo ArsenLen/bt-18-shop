@@ -12,6 +12,8 @@ const CatalogPage = () => {
   const [sorted, setSorted] = useState("price");
   const [productOffset, setProductOffset] = useState(0); // с какого продукта начинать
   const productsPerPage = 4
+  const [forcePage, setForcePage] = useState(0)
+  const [gridView, setGridView] = useState(true)
 
   const endOffset = productOffset + productsPerPage; // число, до которого нам нужно показывать продукты
   console.log(`Loading items from ${productOffset} to ${endOffset}`);
@@ -21,6 +23,7 @@ const CatalogPage = () => {
   const handlePageClick = (event) => {
     const newOffset = event.selected * productsPerPage; // 2 * 4 = 8
     setProductOffset(newOffset);
+    setForcePage(event.selected)
   };
 
   useEffect(() => {
@@ -45,11 +48,13 @@ const CatalogPage = () => {
       );
       setProducts(sortedProducts);
     }
+    setForcePage(0)
+    setProductOffset(0)
   }, [sorted]);
   return (
     <div>
       <Breadcrumbs />
-      <Filter setSorted={setSorted} sorted={sorted} />
+      <Filter setSorted={setSorted} sorted={sorted} setGridView={setGridView} />
       <div className={styles["products-wrapper"]}>
         {currentProducts.map((product) => {
           return (
@@ -59,18 +64,24 @@ const CatalogPage = () => {
               title={product.title}
               price={product.price}
               date={product.createdAt}
+              gridView={gridView}
             />
           );
         })}
       </div>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel="Next"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel=""
         renderOnZeroPageCount={null}
+        containerClassName={styles["pagination-wrapper"]}
+        pageLinkClassName={styles["pagination-page"]}
+        nextClassName={styles["pagination-next"]}
+        activeLinkClassName={styles["pagination-active"]}
+        forcePage={forcePage}
       />
       <Info />
     </div>
