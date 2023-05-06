@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './singleproductcard.module.css'
 
-const SingleProductCard = () => {
+// При нажатии на -, увеличивать количество 
+// При нажатии на +, уменьшать
+
+const SingleProductCard = ({ img, title, price, descr }) => {
     return (
         <div className={styles.card}>
             <div className={styles.wrapper}>
@@ -9,9 +12,9 @@ const SingleProductCard = () => {
                     <img src={img} alt="" />
                 </div>
                 <div className={styles.info}>
-                    <h1 className={styles.title}>Test Title</h1>
-                    <p className={styles.price}>10000</p>
-                    <p className={styles.descr}>Test descr</p>
+                    <h1 className={styles.title}>{title}</h1>
+                    <p className={styles.price}>{price}</p>
+                    <p className={styles.descr}>{descr}</p>
                     <div className={styles["control-wrapper"]}>
                         <div className={styles.quantity}>
                             <button className={styles["quantity-control"]}>-</button> 

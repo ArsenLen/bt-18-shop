@@ -60,6 +60,7 @@ const CatalogPage = () => {
           return (
             <Product
               key={product._id}
+              id={product._id}
               img={product.img}
               title={product.title}
               price={product.price}
