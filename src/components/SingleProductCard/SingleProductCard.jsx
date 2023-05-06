@@ -1,10 +1,15 @@
 import React from 'react';
 import styles from './singleproductcard.module.css'
+import { useState } from 'react';
+import { addToCart } from '../../redux/cartSlice';
+import { useDispatch } from 'react-redux';
 
 // При нажатии на -, увеличивать количество 
 // При нажатии на +, уменьшать
 
-const SingleProductCard = ({ img, title, price, descr }) => {
+const SingleProductCard = ({ img, title, price, descr, product }) => {
+    const [quantity, setQuantity] = useState(1)
+    const dispatch = useDispatch()
     return (
         <div className={styles.card}>
             <div className={styles.wrapper}>
@@ -17,11 +22,11 @@ const SingleProductCard = ({ img, title, price, descr }) => {
                     <p className={styles.descr}>{descr}</p>
                     <div className={styles["control-wrapper"]}>
                         <div className={styles.quantity}>
-                            <button className={styles["quantity-control"]}>-</button> 
-                                <span>1</span>
-                            <button className={styles["quantity-control"]}>+</button>
+                            <button className={styles["quantity-control"]} onClick={() => quantity > 1 && setQuantity(quantity - 1)}>-</button> 
+                                <span>{quantity}</span>
+                            <button className={styles["quantity-control"]} onClick={() => setQuantity(quantity + 1)}>+</button>
                         </div>
-                        <button className={styles.add}>
+                        <button className={styles.add} onClick={() => dispatch(addToCart(product))}>
                             Add To Cart
                         </button>
                     </div>
@@ -32,3 +37,5 @@ const SingleProductCard = ({ img, title, price, descr }) => {
 };
 
 export default SingleProductCard;
+
+// condition && true

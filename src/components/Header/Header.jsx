@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './header.module.css'
 import Modal from '../Modal/Modal';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+    const cartQuantity = useSelector(state => state.cart.quantityCart)
     return (
         <>
         <header>
@@ -24,10 +26,11 @@ const Header = () => {
                         <img src="/images/favorite-icon.png" alt="" className={styles.icon} />
                     </p>
                     <p className={styles.icon}>
-                        <span className={styles.quantity}>1</span>
+                        { cartQuantity > 0 && <span className={styles.quantity}>{cartQuantity}</span> } 
                         <img src="/images/basket-icon.png " alt="" className={styles.icon} />
                     </p>
                 </div>
+                { cartQuantity > 0 && <Modal /> }
             </div>
         </header>
         </>
