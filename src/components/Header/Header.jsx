@@ -2,8 +2,10 @@ import React from 'react';
 import styles from './header.module.css'
 import Modal from '../Modal/Modal';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
+    const isOpen = useSelector(state => state.cart.isOpen)
     const cartQuantity = useSelector(state => state.cart.quantityCart)
     return (
         <>
@@ -11,7 +13,7 @@ const Header = () => {
             <div className={styles.wrapper} >
                 <nav className={styles.nav}>
                     <a href="/" className={styles.link}>Home</a>
-                    <a href="/" className={styles.link}>Shop</a>
+                    <Link href="/catalog" className={styles.link}>Shop</Link>
                     <a href="/" className={styles.link}>About</a>
                     <a href="/" className={styles.link}>Contact</a>
                 </nav>
@@ -30,7 +32,7 @@ const Header = () => {
                         <img src="/images/basket-icon.png " alt="" className={styles.icon} />
                     </p>
                 </div>
-                { cartQuantity > 0 && <Modal /> }
+                { isOpen && <Modal /> }
             </div>
         </header>
         </>
@@ -38,3 +40,5 @@ const Header = () => {
 };
 
 export default Header;
+
+// Сделать возможность открыть корзину

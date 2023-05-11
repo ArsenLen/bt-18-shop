@@ -26,7 +26,7 @@ const SingleProductCard = ({ img, title, price, descr, product }) => {
                                 <span>{quantity}</span>
                             <button className={styles["quantity-control"]} onClick={() => setQuantity(quantity + 1)}>+</button>
                         </div>
-                        <button className={styles.add} onClick={() => dispatch(addToCart(product))}>
+                        <button className={styles.add} onClick={() => dispatch(addToCart({...product, quantity}))}>
                             Add To Cart
                         </button>
                     </div>
@@ -39,3 +39,16 @@ const SingleProductCard = ({ img, title, price, descr, product }) => {
 export default SingleProductCard;
 
 // condition && true
+
+/*
+    let quantity = 4
+
+    let product = {
+        title,
+        id,
+        descr,
+        price,
+        category,
+        quantity: 4
+    }
+*/

@@ -1,10 +1,12 @@
 import React from "react";
 import styles from "./modal.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal } from "../../redux/cartSlice";
+import { Link } from "react-router-dom";
 
 const Modal = () => {
   const products = useSelector(state => state.cart.productsCart)
-  console.log(products)
+  const dispatch = useDispatch()
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -12,6 +14,7 @@ const Modal = () => {
           src="/images/basket-close-icon.png"
           alt=""
           className={styles.close}
+          onClick={() => dispatch(closeModal())}
         />
         <h2 className={styles.title}>Shopping Cart</h2>
         <div className={styles.line}></div>
@@ -30,9 +33,9 @@ const Modal = () => {
             <p className={styles.subtotal}>Subtotal</p> Rs. 250,000.00
           </div>
           <div className={styles.line}></div>
-          <a href="/cart" className={styles.link}>
+          <Link to="/cart" className={styles.link}>
             View Cart
-          </a>
+          </Link>
           <a href="/checkout" className={styles.link}>
             Checkout
           </a>
