@@ -6,15 +6,18 @@ const cartSlice = createSlice({
         quantityCart: 0,
         productsCart: [],
         isOpen: false, 
+        sum: 0
     },
     reducers: {
         addToCart: (state, action) => {
             state.isOpen = true // открываем модальное только
             const indexProduct = state.productsCart.findIndex(product => product._id === action.payload._id)
+            state.sum += action.payload.price * action.payload.quantity // считаем сумму
             if(indexProduct === -1) {
                 // действие, когда товара нет в корзине
                 state.productsCart.push(action.payload)
                 state.quantityCart++
+                
             } else {
                 // если такой товар в корзине есть
                 state.productsCart[indexProduct].quantity += action.payload.quantity // добавляем к количеству товаров
@@ -35,3 +38,15 @@ export default cartSlice.reducer
 
 
 // [{id: 1}, {id: 2}, {id: 3, quantity: 3+2}, {id: 4}]  ----> {id: 3, quantity: 2} ---> 2
+
+/*
+    {...product, quantity}
+
+    action.payload : {
+        id,
+        title,
+        price,
+        img,
+        quantity
+    }
+*/

@@ -21,7 +21,7 @@ const CatalogPage = () => {
   const pageCount = Math.ceil(products.length / productsPerPage); // количество страниц
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * productsPerPage) % items.length; // 2 * 4 = 8
+    const newOffset = (event.selected * productsPerPage); // 2 * 4 = 8
     setProductOffset(newOffset);
     setForcePage(event.selected)
   };

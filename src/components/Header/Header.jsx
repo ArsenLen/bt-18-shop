@@ -13,9 +13,10 @@ const Header = () => {
             <div className={styles.wrapper} >
                 <nav className={styles.nav}>
                     <a href="/" className={styles.link}>Home</a>
-                    <Link href="/catalog" className={styles.link}>Shop</Link>
+                    <Link to="/catalog" className={styles.link}>Shop</Link>
                     <a href="/" className={styles.link}>About</a>
                     <a href="/" className={styles.link}>Contact</a>
+                    <Link to="/add" className={styles.link}>Add Product</Link>
                 </nav>
                 <div className={styles.icons}>
                     <a href="/" className={styles.icon}>
